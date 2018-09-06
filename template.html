@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Laravel CRUD</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <p>Logged as <b>Pajaro</b> <a class="waves-effect waves-light btn">Logout</a></p>
+
+        
+     <ul class="collapsible">
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">person_add</i>
+            Invitations
+            <span class="new badge red">1</span></div>
+            <div class="collapsible-body">
+                <p>
+                 <span class="red-text"><b>Buzz Lightyear</b></span> <a href="">Accept</a> | <a href="">Deny</a>
+                </p>
+            </div>
+        </li>
+      </ul>
+
+      <h1 class="center-align green-text text-darken-4">To-do list</h1>
+
+      <table>
+            <thead>
+              <tr>
+                  <th>Task</th>
+                  <th>Assigned to</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="">Make a joint.</a></td>
+                <td>Woody Harrison</td>
+                <td><a title="edit" href=""><i class="small material-icons">edit</i></a></td>
+                <td><a title="delete" href=""><i class="small material-icons">delete</i></a></td>
+              </tr>
+            </tbody>
+        </table>
+
+        <ul class="pagination">
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+            <li class="active"><a href="#!">1</a></li>
+            <li class="waves-effect"><a href="#!">2</a></li>
+            <li class="waves-effect"><a href="#!">3</a></li>
+            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        </ul>
+
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="task" type="text" class="validate">
+                    <label for="task">New Task</label>
+                </div>
+            </div>
+
+            <div class="input-field col s12">
+                <select>
+                  <option value="" disabled selected>Assign To:</option>
+                  <option value="1">To myself</option>
+                  <option value="2">Buzz Lightyear</option>
+                  <option value="3">Pajaro</option>
+                </select>
+                <label>Assign Task</label>
+            </div>
+
+            <a class="waves-effect waves-light btn">Add new task</a>
+        </form>
+
+        <br><br><br>
+
+        <ul class="collection with-header">
+            <li class="collection-header"><h4>My Coworkers</h4></li>
+            <li class="collection-item"><div>Buzz Lightyear<a href="#!" class="secondary-content">Delete</a></div></li>
+            <li class="collection-item"><div>Charles Manson<a href="#!" class="secondary-content">Delete</a></div></li>
+        </ul>
+
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input value="task content to edit" id="edit_task" type="text" class="validate">
+                    <label for="edit_task">Edit Task</label>
+                </div>
+            </div>
+
+            <a class="waves-effect waves-light btn">Edit task</a>
+        </form>
+            
+    </div>
+    
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+
+  <script>
+      var elems = document.querySelectorAll('.collapsible');
+      var options;
+      var instances = M.Collapsible.init(elems, options);
+
+      var elems2 = document.querySelectorAll('select');
+     var instances = M.FormSelect.init(elems2);
+  </script>
+    
+  </body>
+</html>
