@@ -19,6 +19,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/delete/{id}', 'TodoController@delete')->name('delete');
 
     Route::get('/updateStatus/{id}', 'TodoController@updateStatus')->name('updateStatus');
+    Route::post('/sendInvitation', 'TodoController@sendInvitation')->name('sendInvitation');
 });
 
 Auth::routes();

@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Task;
+use App\User;
+use App\Invitation;
 use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
     public function index(){
-        $tasks = Task::all();
+        $tasks = Task::where('user_id',Auth::user()->id)->orderBy('created_at','DESC')->paginate(4);
 
-        return view('index',compact('tasks'));
+        $coworkers = User::where('is_admin',1)->get();
+
+        return view('index',compact('tasks','coworkers'));
     }
 
     public function store(Request $request){
@@ -59,6 +63,24 @@ class TodoController extends Controller
 
         $task->status = !$task->status;
         $task->save();
+        return redirect()->back();
+    }
+
+    public function sendInvitation(Request $request){
+
+        if ((int)$request->input('admin') > 0
+        && !Invitation::where('worker_id',Auth::user()->id)
+                        ->where('admin_id',$request->input('admin'))
+                        ->exists()) {
+
+            $invitation = new Invitation;
+
+            $invitation->worker_id = Auth::user()->id;
+            $invitation->admin_id = $request->input('admin');
+            $invitation->save();
+
+        }
+
         return redirect()->back();
     }
 
