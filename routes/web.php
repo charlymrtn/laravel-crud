@@ -11,10 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', 'TodoController@index');
+    Route::get('/edit', 'TodoController@edit')->name('edit');
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
