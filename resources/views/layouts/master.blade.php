@@ -21,21 +21,26 @@
                 <p>Logged as <b>{{Auth::user()->name}}</b> <button type="submit" class="waves-effect waves-light btn">Logout</button></p>
         </form>
 
-
         @isAdmin
-        <ul class="collapsible">
-            <li>
-            <div class="collapsible-header">
-                <i class="material-icons">person_add</i>
-                Invitations
-                <span class="new badge red">1</span></div>
-                <div class="collapsible-body">
-                    <p>
-                    <span class="red-text"><b>Buzz Lightyear</b></span> <a href="">Accept</a> | <a href="">Deny</a>
-                    </p>
-                </div>
-            </li>
-        </ul>
+        @if ( count($invitations) > 0 )
+            <ul class="collapsible">
+                <li>
+                <div class="collapsible-header">
+                    <i class="material-icons">person_add</i>
+                    Invitations
+                    <span class="new badge red">{{count($invitations)}}</span></div>
+                    <div class="collapsible-body">
+                        @foreach ($invitations as $invitation)
+                            <p>
+                                <span class="red-text">
+                                    <b>{{ $invitation->worker->name }}</b>
+                                </span> <a href="{{ route('acceptInvitation',$invitation->id) }}">Accept</a> | <a href="">Deny</a>
+                            </p>
+                        @endforeach
+                    </div>
+                </li>
+            </ul>
+        @endif
         @endisAdmin
 
       <h1 class="center-align green-text text-darken-4">To-do list</h1>

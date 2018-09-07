@@ -20,6 +20,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/updateStatus/{id}', 'TodoController@updateStatus')->name('updateStatus');
     Route::post('/sendInvitation', 'TodoController@sendInvitation')->name('sendInvitation');
+    Route::post('/acceptInvitation', 'TodoController@acceptInvitation')->name('acceptInvitation');
+
 });
 
 Auth::routes();

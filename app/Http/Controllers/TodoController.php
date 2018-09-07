@@ -11,11 +11,20 @@ use Illuminate\Support\Facades\Auth;
 class TodoController extends Controller
 {
     public function index(){
-        $tasks = Task::where('user_id',Auth::user()->id)->orderBy('created_at','DESC')->paginate(4);
 
-        $coworkers = User::where('is_admin',1)->get();
+        if (Auth::user()->is_admin) {
 
-        return view('index',compact('tasks','coworkers'));
+            $coworkers = Invitation::where('admin_id',Auth::user()->id)->where('accepted',1)->get();
+            $invitations = Invitation::where('admin_id',Auth::user()->id)->where('accepted',0)->get();
+            $tasks = Task::where('user_id',Auth::user()->id)->orWhere('admin_id',Auth::user()->admin_id)->orderBy('created_at','DESC')->paginate(4);
+        }else{
+
+            $invitations = [];
+            $tasks = Task::where('user_id',Auth::user()->id)->orderBy('created_at','DESC')->paginate(4);
+            $coworkers = User::where('is_admin',1)->get();
+        }
+
+        return view('index',compact('tasks','coworkers','invitations'));
     }
 
     public function store(Request $request){
@@ -82,6 +91,10 @@ class TodoController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function acceptInvitation(){
+
     }
 
 
