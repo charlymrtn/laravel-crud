@@ -72,6 +72,13 @@ class TodoController extends Controller
     public function delete($id){
 
         $task = Task::find($id);
+
+        if (!Auth::user()->is_admin) {
+            if(!$this->_authorize($task->user_id)){
+                return redirect()->back();
+                exit();
+            }
+        }
         $task->delete();
 
         return redirect()->back();
@@ -98,6 +105,7 @@ class TodoController extends Controller
                 }
 
             }else{
+                if($this->_authorize($task->user_id))
                 $task->save();
             }
 
@@ -111,7 +119,11 @@ class TodoController extends Controller
         $task = Task::find($id);
 
         $task->status = !$task->status;
-        $task->save();
+        if ($this->_authorize($task->user_id)) {
+
+            $task->save();
+        }
+
         return redirect()->back();
     }
 
@@ -138,9 +150,15 @@ class TodoController extends Controller
 
         if ($status == '1') {
             $invitation->accepted = true;
-            $invitation->save();
+            if ($this->_authorize($invitation->admin_id)) {
+                # code...
+                $invitation->save();
+            }
         }else{
-            $invitation->delete();
+            if ($this->_authorize($invitation->admin_id)) {
+                # code...
+                $invitation->delete();
+            }
         }
 
         return redirect()->back();
@@ -148,9 +166,17 @@ class TodoController extends Controller
 
     public function deleteWorker($id){
         $invitation = Invitation::find($id);
-        $invitation->delete();
+        if ($this->_authorize($invitation->admin_id)) {
+            # code...
+            $invitation->delete();
+        }
 
         return redirect()->back();
+    }
+
+    protected function _authorize($id){
+
+        return Auth::user()->id === $id ? true : false;
     }
 
 }
