@@ -19,8 +19,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/delete/{id}', 'TodoController@delete')->name('delete');
 
     Route::get('/updateStatus/{id}', 'TodoController@updateStatus')->name('updateStatus');
+
     Route::post('/sendInvitation', 'TodoController@sendInvitation')->name('sendInvitation');
-    Route::post('/acceptInvitation', 'TodoController@acceptInvitation')->name('acceptInvitation');
+    Route::get('/updateInvitation/{id}/{status}', 'TodoController@updateInvitation')->name('updateInvitation');
+
+    Route::get('/deleteWorker/{id}', 'TodoController@deleteWorker')->name('deleteWorker');
+
+
 
 });
 

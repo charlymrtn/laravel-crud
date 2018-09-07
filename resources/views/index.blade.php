@@ -73,8 +73,12 @@
 
     <ul class="collection with-header">
         <li class="collection-header"><h4>My Coworkers</h4></li>
-        <li class="collection-item"><div>Buzz Lightyear<a href="#!" class="secondary-content">Delete</a></div></li>
-        <li class="collection-item"><div>Charles Manson<a href="#!" class="secondary-content">Delete</a></div></li>
+        @foreach ($coworkers as $coworker)
+            <li class="collection-item"><div>{{$coworker->worker->name}}
+                <a href="{{ route('deleteWorker',$coworker->id) }}" class="secondary-content">Delete</a>
+                </div>
+            </li>
+        @endforeach
     </ul>
     @endisAdmin
 

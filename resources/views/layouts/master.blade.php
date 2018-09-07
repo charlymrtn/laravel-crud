@@ -34,7 +34,8 @@
                             <p>
                                 <span class="red-text">
                                     <b>{{ $invitation->worker->name }}</b>
-                                </span> <a href="{{ route('acceptInvitation',$invitation->id) }}">Accept</a> | <a href="">Deny</a>
+                                </span> <a href="{{ route('updateInvitation',[$invitation->id,'1']) }}">Accept</a> |
+                                <a href="{{ route('updateInvitation',[$invitation->id,'0']) }}">Deny</a>
                             </p>
                         @endforeach
                     </div>
